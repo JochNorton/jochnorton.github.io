@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pqpqbdbd</title>
+<meta name="description" content="pqpqbdbd pops in when you scroll.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A4%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef0f5;
+    --ink: #1b2233;
+    --accent: #e5242f;
+    --muted: #7a8196;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151f;
+      --ink: #eceef6;
+      --accent: #ff6b6b;
+      --muted: #7b8299;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151f;
+    --ink: #eceef6;
+    --accent: #ff6b6b;
+    --muted: #7b8299;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Outfit", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  section {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+  }
+  .hero { align-content: center; justify-items: center; gap: 1.25rem; }
+  .hero p {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .hero .line {
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(var(--muted), transparent);
+  }
+  .word {
+    display: flex;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 12vw, 10rem);
+    line-height: 1;
+    letter-spacing: 0.03em;
+  }
+  .word span {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0) rotate(-24deg);
+    transition:
+      transform 0.7s cubic-bezier(0.34, 1.7, 0.5, 1),
+      opacity 0.25s ease-out;
+    transition-delay: calc(var(--i) * 80ms);
+  }
+  .word span:nth-child(n+5) { color: var(--accent); }
+  .word.pop span { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .word span { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <p>scroll</p>
+    <div class="line"></div>
+  </section>
+
+  <section>
+    <h1 class="word" id="word" aria-label="pqpqbdbd">
+      <span style="--i:0" aria-hidden="true">p</span><span style="--i:1" aria-hidden="true">q</span><span style="--i:2" aria-hidden="true">p</span><span style="--i:3" aria-hidden="true">q</span><span style="--i:4" aria-hidden="true">b</span><span style="--i:5" aria-hidden="true">d</span><span style="--i:6" aria-hidden="true">b</span><span style="--i:7" aria-hidden="true">d</span>
+    </h1>
+  </section>
+
+<script>
+  var word = document.getElementById('word');
+  var target = word.parentElement;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.intersectionRatio >= 0.6) word.classList.add('pop');
+      else if (e.intersectionRatio < 0.05) word.classList.remove('pop');
+    });
+  }, { threshold: [0, 0.05, 0.6] });
+  io.observe(target);
+</script>
+</body>
+</html>
