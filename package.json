@@ -1,0 +1,14 @@
+{
+  "name": "slotboard",
+  "version": "1.0.0",
+  "description": "Sign-up sheets without accounts: a master code runs the event, invite links let people sign up.",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
